@@ -21,6 +21,8 @@ urlpatterns = [
     path('',include("Home.urls")),
     path('accounts/',include("accounts.urls")),
     path('driver/',include("Driver.urls")),
+    path('consignor/',include("Consignor.urls")),
+    path('commonman/',include("Commonman.urls")),
 
 ]
  

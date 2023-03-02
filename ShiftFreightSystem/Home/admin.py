@@ -41,3 +41,4 @@ class RegAdmin(admin.ModelAdmin):
     list_display = ['driver_name','driver_address','driver_email','driver_phone','driver_licence']
     actions = [export_driver]
 admin.site.register(Driver,RegAdmin)
+

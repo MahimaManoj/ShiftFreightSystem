@@ -2,7 +2,7 @@ from distutils.command.upload import upload
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin, AbstractUser
 import datetime
 
 
@@ -23,6 +23,7 @@ class MyAccountManager(BaseUserManager):
             phone = phone,
             is_consignor=is_consignor,
             is_commonman=is_commonman,
+
 
         )
 
@@ -117,4 +118,5 @@ class Account(AbstractBaseUser,PermissionsMixin):
     def has_module_perms(self, add_label):
         return True
     
+
 

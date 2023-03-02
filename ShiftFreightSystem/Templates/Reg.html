@@ -111,7 +111,7 @@
           <div class="col-lg-5 quote-bg" style="background-image: url(assets/img/quote-bg.jpg);"></div>
 
           <div class="col-lg-7">
-            <form onsubmit ="return nameValidate() && emailValidation() && addressValidation() && cityValidation() && districtValidation() && pincodeValidation() && passwordValidation() && cpasswordValidation()" action="{%url 'registration' %}" method="post" >
+            <form action="{%url 'registration' %}" method="post" >
               {% csrf_token %}
               <h3>Enter the details</h3>
               <!-- <p>Our effectual services have always helped us in taking the packing and relocation business to the great heights, ensuring to move forward and achieve many accreditations and accolades in various fields.</p> -->
@@ -119,36 +119,36 @@
 
                 <div class="col-md-6">
                   <!-- <input type="text" name="role" id="name" class="form-control" placeholder="Register as" required> -->
-                  <select class="form-control" name="role" path="role" id="role">
-                    <option selected>Choose the role</option>
+                  <select class="form-control" name="role" id="role">
+                    <option selected>Register as</option>
                     <option value="is_consignor">Consignor</option>
                     <option value="is_commonman">Common Man</option>
                 </select>
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="name" id="name" class="form-control" placeholder="Company Name or Full Name" onkeyup="nameValidate(this)" required>
-                  <span id = "nameError" style="color:rgb(255,0, 0,0.404);"></span>
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Company Name or Full Name"  required>
+                  
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="address1" class="form-control" placeholder="Address line 1" onkeyup='addressValidation(this)' required>
-                  <span class="error-msg" id="address"></span>
+                  <input type="text" name="address1" class="form-control" placeholder="Address line 1"  required>
+                  
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="address2" class="form-control" placeholder="Address line 2" onkeyup='addressValidation(this)' required>
-                  <span class="error-msg" id="address"></span>
+                  <input type="text" name="address2" class="form-control" placeholder="Address line 2"  required>
+                  
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="city" class="form-control" placeholder="City" onkeyup='cityValidation(this)' required>
-                  <span class="error-msg" id="city"></span>
+                  <input type="text" name="city" class="form-control" placeholder="City"  required>
+                 
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="pincode" class="form-control" placeholder="Pincode" onkeyup='pincodeValidation(this)' required>
-                  <span class="error-msg" id="pincode"></span>
+                  <input type="text" name="pincode" class="form-control" placeholder="Pincode"  required>
+                  
                 </div>
               
 
@@ -181,23 +181,23 @@
                 </div> -->
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="phone"  placeholder="Phone" onkeyup='phoneValidation(this)' required>
-                  <span class="error-msg" id="phone"></span>
+                  <input type="text" class="form-control" name="phone"  placeholder="Phone"  required>
+                 
                 </div>
 
                 <div class="col-md-12 ">
-                  <input type="email" class="form-control" name="email"  placeholder="Email" onkeyup='emailValidation(this)' required>
-                  <span class="error-msg" id="email"> </span>
+                  <input type="email" class="form-control" name="email"  placeholder="Email"  required>
+                  
                 </div>
 
                 <div class="col-md-12 ">
-                  <input type="password" class="form-control" name="password" id="pass1" placeholder="Password" onkeyup='passwordValidation(this)' required>
-                  <span class="error-msg" id="password"></span>
+                  <input type="password" class="form-control" name="password" id="pass1" placeholder="Password" required>
+                  
                 </div>
 
                 <div class="col-md-12 ">
-                  <input type="password" class="form-control" name="cpassword" id="pass2" placeholder="Confirm Password" onkeyup='cpasswordValidation(this)' required>
-                  <span class="error-msg" id="confirmpassword"> </span>
+                  <input type="password" class="form-control" name="cpassword" id="pass2" placeholder="Confirm Password"  required>
+                  
                 </div>
 
                 <!-- <div class="col-md-12">
@@ -245,7 +245,7 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js'%}"></script>
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     function nameValidate(inputTxt){
     
     var regx = /^[a-zA-Z]+ [a-zA-Z]+$/;
@@ -426,7 +426,7 @@ if(inputTxt.value != '' ){
 }
 }
 
-</script>
+</script> -->
 </body>
 
 </html>
