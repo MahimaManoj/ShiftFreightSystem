@@ -1,5 +1,4 @@
 from pyexpat.errors import messages
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Account
 from django.contrib.auth import authenticate, login
@@ -72,13 +71,8 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        role = ''
-        try:
-            role = Account.objects.get(email=email).role
-        except Account.DoesNotExist:
-            return HttpResponse("Invalid")
         print(email,password)
-        user=authenticate(username=role, password=password)
+        user=auth.authenticate(email=email, password=password)
         print(user)
         if user is not None:
             #login(user)
@@ -106,34 +100,18 @@ def DriverLogin(request):
 
 
 
-# def login(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         print(email,password)
-#         user=auth.authenticate(email=email,password=password)
-#         print(user)
-#         if user and user.is_active:
-#             #login(user)
-#             auth.login(request,user)
-#             # save email in session
-#             request.session['email'] = email
-#             if user.is_admin:
-#                 return redirect('/admin/')
-#             if user.is_consignor:
-#                 return redirect('consignorhome')
-#             elif user.is_commonman:
-#                 return redirect('http://127.0.0.1:8000/commonman/commonmanhome')
-#             # elif user.is_driver:
-#             #     return redirect('driverhome')    
-#             else:
-#                 return redirect('/')
-#         else:
-#             # messages.error(request, 'Invalid Credentials')
-#             return redirect('login')
-#     return render(request,'loginNew.html')
-
 
 # def logout(request):
 #     auth.logout(request)
 #     return redirect('login')
+
+
+def Booking1(request):
+    return render(request,'booking1.html')
+
+def Booking2(request):
+    return render(request,'booking2.html')
+
+def Booking3(request):
+    return render(request,'booking3.html')
+
