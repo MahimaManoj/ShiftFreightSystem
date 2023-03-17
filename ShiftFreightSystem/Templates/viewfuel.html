@@ -32,7 +32,7 @@
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/book.css' %}" rel="stylesheet">
-    <script src="{% static 'js/book.js' %}" rel="stylesheet"></script>
+    <script src="{% static 'js/addfuel.js' %}" rel="stylesheet"></script>
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.book.css">
     
     <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.book.css" rel="stylesheet"
@@ -41,6 +41,13 @@
         rel="stylesheet" type="text/css" />
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.book.js"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+      
+        <link rel="stylesheet" href="css/ionicons.min.css">
+        <link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -60,64 +67,113 @@
             <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="http://127.0.0.1:8000/accounts/driverhome/" class="active">Dashboard</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/driverhome/" >Dashboard</a></li>
 
                     <li><a href="">Profile</a></li>
 
-                    <li><a href="http://127.0.0.1:8000/accounts/viewfuel/">Fuel Management</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/viewfuel/" class="active">Fuel Management</a></li>
 
                     <li><a href="">Documents</a></li>
 
-                    <li class="dropdown"><a href="#"><span>{{user.name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                      <ul>
-                        <li><a href="">Logout</a></li>
-                      </ul>
-                    </li>
-
-                    <!-- <ul class="float-right">
-                      <li><a href="#">{{user.name}}</a>
-                <ul>
-                        <li><a href="/accounts/logout" >LOGOUT</a></li>
-                </ul>
-              </li>
-                      
-                  </ul> -->
-          
+                    <li><a href="http://127.0.0.1:8000/accounts/viewlogin">Logout</a></li>
 
                 </ul>
             </nav><!-- .navbar -->
 
         </div>
+        <script src="{% static 'js/addfuel.js' %}" rel="stylesheet"></script>
+
+        <style>
+            
+table, th, td {
+
+border: 1px solid black;
+
+border-collapse: collapse;
+
+}
+
+th, td {
+
+padding: 10px;
+width: 200px;
+
+}
+
+th {
+
+background-color: #6fa9c3;
+
+}
+
+td {
+
+background-color: #deeaef;
+
+}
+colgroup {
+
+width: 600px;
+
+}
+
+        </style>
 
     </header><!-- End Header -->
     <!-- End Header -->
 
 
-    <main id="main" style="margin-top: 200px; margin-left: 50px ; margin-right:300px;">
-      <div class="alert alert-primary" role="alert">
-     <h4>Haii {{user.name}}</h4> Welcome to Shift Freight.&#127881; <br>Go to the Profile section to update your details.
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="card" style="background-color: #bacee1;" >
-            <div class="card-body" >
-              <h5 class="card-title">Fuel Management</h5>
-              <p class="card-text">Add fuel details such as fuel quantity, vehicle name, total amount, etc</p>
-              <a href="#" class="btn btn-primary">Add Fuel</a> <tr><a href="http://127.0.0.1:8000/accounts/viewfuel/" class="btn btn-primary">View Fuel</a></tr>
+    <main id="main" style="margin-top: 150px;">
+        
+        <div>
+            <div style="text-align: right;">
+                <button type="submit" class=" btn btn-success rounded submit">+ Add Fuel</button>
             </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card" style="background-color: #bacee1;">
-            <div class="card-body">
-              <h5 class="card-title">Company Consignment</h5>
-              <p class="card-text">Check out for the consignments offered by the </p>
-              <a href="#" class="btn btn-primary">Check consignment</a>
+            <div style="text-align: center;">
+                <h4>View Fuel</h4>
             </div>
-          </div>
         </div>
-      </div>
+          
+        <center>
+            
+            <hr>
+        <table>
+            <tr>
 
-      </main>
-      </body>
-      </html>
+                <th>Vehicle</th>
+                
+                <th>Added Driver</th>
+                
+                <th>Fill Date</th>
+
+                <th>Quantity</th>
+
+                <th>Amount</th>
+
+                <th>Comment</th>
+                
+                </tr>
+
+            <tr>
+
+                <td>qwertyuiop</td>
+                
+                <td>xcvbn</td>
+                
+                <td>fghjk</td>
+
+                <td>cfgvbhnjmklvbhnjmk</td>
+
+                <td>vgbhnjkm</td>
+
+                <td>vgbhnjkm</td>
+                
+            </tr>
+
+        </table>
+    </center>
+        
+    </main>
+</body>
+
+</html>

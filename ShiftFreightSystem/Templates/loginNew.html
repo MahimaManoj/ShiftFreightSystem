@@ -77,7 +77,7 @@
 								<label for="driver"><a href="http://127.0.0.1:8000/register/login2/">Driver</a></label> -->
 							<br>
 									
-							<form action="{% url 'login' %}" method="post"  autocomplete="off" id="form" class="login-form">
+							<form action="{% url 'viewlogin' %}" method="post"  autocomplete="off" id="form" class="login-form">
 								{% csrf_token %}
 								<div class="form-group">
 									<input type="text" class="form-control rounded-left" id="email" name="email" placeholder="email" required>
@@ -88,7 +88,9 @@
 								<div class="form-group">
 									<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
 								</div>
-								
+								<span class="ml-auto"><a href="/accounts/forgotPassword/" class="forgot-pass">Forgot Password</a></span> 
+								<span class="ml-auto"><a href="/accounts/registration/" class="forgot-pass">Register Here</a></span>
+              </div>
 							</form>
 							
 						</div>

@@ -7,7 +7,7 @@ import datetime
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self,name,address1,address2,city,pincode,district,phone,email,is_commonman,is_consignor,password=None):
+    def create_user(self,name,address1,address2,city,pincode,district,state,phone,email,is_consignor,password=None):
 
         if not email:
             raise ValueError('User must have an email address')
@@ -20,9 +20,9 @@ class MyAccountManager(BaseUserManager):
             city=city,
             pincode=pincode,
             district = district,
+            state=state,
             phone = phone,
             is_consignor=is_consignor,
-            is_commonman=is_commonman,
 
 
         )
@@ -48,7 +48,7 @@ class MyAccountManager(BaseUserManager):
     
 class Account(AbstractBaseUser,PermissionsMixin):
     status_choices=(('Approved','Approved'),('Pending','Pending'), ('None','None'))
-    role_choices=(('is_admin','is_admin'),('is_consignor','is_consignor'),('is_commonman','is_commonman'),('is_driver','is_driver'))
+    role_choices=(('is_admin','is_admin'),('is_consignor','is_consignor'),('is_driver','is_driver'))
     district_choices=(
         ('Kozhikode','Kozhikode'),
         ('Malappuram','Malappuram'),
@@ -76,6 +76,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
     address1      = models.CharField(max_length=100, default='')
     address2      = models.CharField(max_length=100, default='')
     city          = models.CharField(max_length=100, default='')
+    state          = models.CharField(max_length=100, default='')
     district      = models.CharField(max_length=50,choices=district_choices,default='None')
     pincode       = models.BigIntegerField(default=0)
     role          = models.CharField(max_length=100,choices=role_choices)
@@ -89,7 +90,6 @@ class Account(AbstractBaseUser,PermissionsMixin):
     last_login      = models.DateTimeField(auto_now_add=True)
     is_admin        = models.BooleanField(default=False)
     is_consignor      = models.BooleanField(default=False)
-    is_commonman  = models.BooleanField(default=False)
     is_driver      = models.BooleanField(default=False)
     
 
@@ -100,7 +100,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'phone', 'address1','address2','city','pincode','district','is_consignor','is_commonman']
+    REQUIRED_FIELDS = ['name', 'phone', 'address1','address2','city','state','pincode','district','is_consignor']
     # REQUIRED_FIELDS = [,'password']
 
 
@@ -118,5 +118,4 @@ class Account(AbstractBaseUser,PermissionsMixin):
     def has_module_perms(self, add_label):
         return True
     
-
 

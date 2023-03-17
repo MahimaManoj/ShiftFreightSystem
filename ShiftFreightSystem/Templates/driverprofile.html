@@ -52,19 +52,29 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <style>
-#header{
-  height: 10px;
-}
+
 .container{
-  margin-top: 8pc;
-  margin-left: 100px;
+  /* margin-top: 8pc; */
+  margin-left: 330px;
+  margin-bottom: -200px;
+ 
 }
-.card-deck{
-  margin-top: 3pc;
+
+.card-body{
+    padding-left: 70px;
 }
-.card{
-    height: fit-content;
-    margin-top: 30px;
+.hero{
+    margin-bottom: -30px;
+}
+.card-title-1{
+    padding-left: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: antiquewhite;
+    
+}
+.card-title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: antiquewhite;
 }
 
 </style>
@@ -73,7 +83,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center fixed-top" style="background-color: rgba(16, 8, 125, 0.114);" >
+  <header id="header" class="header d-flex align-items-center fixed-top"  >
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="http://127.0.0.1:8000/" class="logo d-flex align-items-center">
@@ -86,70 +96,70 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="27.0.0.1:8000/consignor/consignorhome/" class="active">Home</a></li>
-          <li><a href="" class="active">Profile</a></li>
-          
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="http://127.0.0.1:8000/register/compprofile">View Profile</a></li>
+              <li><a href="">Update Profile</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="#"><span>Bookings</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="http://127.0.0.1:8000/accounts/book/">Make Booking</a></li>
-              <!-- <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> -->
+              <li><a href="">Make Booking</a></li>
               <li><a href="">View Booking</a></li>
-            </ul> 
+            </ul>
           </li>
           <!-- <li><a href="http://127.0.0.1:8000/contact/">Contact</a></li> -->
-
-          <!-- <li class="dropdown"><a href="#"><span>Booking Summary</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="#"><span>Complaints</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="">Driver details</a></li>
-               <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> 
-              <li><a href="">Vehicle details</a></li>
-            </ul>
-          </li> -->
-          <li><a href="" class="active">Payment</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Truck Management</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="http://127.0.0.1:8000/register/addvehicle/">Add Truck</a></li>
-               <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> 
-              <li><a href="">All Truck</a></li>
-            </ul>
-          </li> -->
-          <li class="dropdown">{%for i in user1 %}<a href="#"><i class="fa-solid fa-truck">&nbsp</i>&nbsp<span>{{i.com_name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>{% endfor %}
-            <ul>
-              <li><a href="">View Profile</a></li>
-              <!-- <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> -->
-              
-              
+              <li><a href="http://127.0.0.1:8000/register/adddriver/">Post Complaint</a></li>
             </ul>
           </li>
-          
+          <li><a href="{% url 'logout' %}" >Logout</a></li>
         </ul>
       </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
+   <!-- ======= Hero Section ======= -->
+   <section id="hero" class="hero d-flex align-items-center">
     <div class="container">
-      <div class="row gy-4 d-flex justify-content-between">
+      <div class="row gy-4 d-flex justify-content-between" style="font-family:#888 ;" >
+        <h3><b></b>Profile</b></h3>
+        {% for us in user %}
         <div class="card" style="width: 50rem; background-color: rgba(52, 65, 118, 0.541);">
-          <div class="card-body">
-            <h5 class="card-title">Welcome to Shift Freight &#127881;</h5>
-            <h6 class="card-subtitle mb-2 text-muted"></h6>
-            <p class="card-text">Shift Freight is the one stop solution for your transport requirements.</p>
-            <!-- <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a> -->
-           </div>
-        </div>
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa-solid fa-user" > &nbsp {{us.name}}</i></h5><br>
+              <h5 class="card-title-1"> &nbsp Email : {{us.email}}</h5><br>
+              <h5 class="card-title-1"> &nbsp Phone : {{us.phone}}</h5><br>
+              <h5 class="card-title-1"> &nbsp Address Line 1 : {{us.address1}}</h5><br>
+              <h5 class="card-title-1"> &nbsp Address Line 2 : {{us.address2}}</h5><br>
+              <h5 class="card-title-1"> &nbsp City : {{us.city}}</h5><br>
+              <h5 class="card-title-1"> &nbsp District : {{us.district}}</h5><br>
+              <h5 class="card-title-1"> &nbsp State : {{us.state}}</h5><br>
+              <h5 class="card-title-1"> &nbsp pincode : {{us.pin}}</h5>
+             </div>
+          </div>
+          {% endfor %}
+        
 
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-          <img src="{% static 'assets/img/hero-img.svg' %}" class="img-fluid mb-3 mb-lg-0" alt="">
+          <img src="{% static 'assets/img/hero-img.svg' %}" class="img-fluid mb-3 mb-lg-0" alt="" >
         </div>
 
       </div>
     </div>
   </section><!-- End Hero Section -->
+
+
   <!-- <div class="container">
-  
+  <div class="card" style="width: 50rem; background-color: rgb(205, 213, 244);">
+    <div class="card-body">
+      <h5 class="card-title">Welcome to Shift Freight &#127881;</h5>
+      <h6 class="card-subtitle mb-2 text-muted"></h6>
+      <p class="card-text">Shift Freight is the one stop solution for your transport requirements.</p>
+      <!-- <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a> -->
+    <!-- </div>
   </div>
   <div class="card-deck">
   <div class="card" style="width: 18rem;">
@@ -161,7 +171,7 @@
   </div>
   </div>
 
-</div> --> 
+</div> --> -->
 
 
 </div>

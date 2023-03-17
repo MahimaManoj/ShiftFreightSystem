@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home',
     'accounts',
-    'Driver',
-    'Consignor',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +79,7 @@ WSGI_APPLICATION = 'ShiftFreightSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'TMS',
+        'NAME': 'TMSystem',
         'USER': 'postgres',
         'PASSWORD': 'Nayasa@1234',
         'HOST': 'localhost',
@@ -89,7 +87,7 @@ DATABASES = {
 }
 
 
-AUTH_USER_MODEL="accounts.Account"
+AUTH_USER_MODEL='accounts.Account'
 
 
 # Password validation
@@ -139,3 +137,14 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jobportalajce@gmail.com'
+DEFAULT_FROM_EMAIL = 'jobportalajce@gmail.com'
+SERVER_EMAIL = 'jobportalajce@gmail.com'
+EMAIL_HOST_PASSWORD = 'xmsusnizxvfoudlu'
+
+EMAIL_USE_TLS = True
