@@ -84,7 +84,6 @@ class Account(AbstractBaseUser,PermissionsMixin):
     # dob           = models.DateField(blank=True,null=True)
     # gender        = models.CharField(max_length=50,choices=gender_choices,default='None')
     
-
     # required
     date_joined     = models.DateTimeField(auto_now_add=True)
     last_login      = models.DateTimeField(auto_now_add=True)
@@ -118,4 +117,3 @@ class Account(AbstractBaseUser,PermissionsMixin):
     def has_module_perms(self, add_label):
         return True
     
-

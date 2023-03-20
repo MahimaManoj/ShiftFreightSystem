@@ -236,3 +236,6 @@ def activate(request, uidb64, token):
         return redirect('register')
 
 
+def DriverConsignment(request):
+    return render(request,'driverconsignment.html')
+

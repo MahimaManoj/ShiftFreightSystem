@@ -72,11 +72,11 @@
 <body>
 
     <header id="header" style="background-color: #1f3e5d;" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <!-- <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <a href="http://127.0.0.1:8000/" class="logo d-flex align-items-center">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
+                 Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt="">
                 <h1>Shift Freight</h1>
             </a>
 
@@ -90,7 +90,7 @@
 
                     <li><a href="http://127.0.0.1:8000/accounts/viewfuel/">Fuel Management</a></li>
 
-                    <li><a href="">Documents</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/driverconsignment/">Consignment</a></li>
 
                     <li class="dropdown"><a href="#"><span>{{user.name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                       <ul>
@@ -98,25 +98,25 @@
                       </ul>
                     </li>
 
-                    <!-- <ul class="float-right">
+                     <ul class="float-right">
                       <li><a href="#">{{user.name}}</a>
                 <ul>
                         <li><a href="/accounts/logout" >LOGOUT</a></li>
                 </ul>
               </li>
                       
-                  </ul> -->
+                  </ul> 
           
 
                 </ul>
-            </nav><!-- .navbar -->
+            </nav> .navbar 
 
-        </div>
+        </div> -->
 
     </header><!-- End Header -->
     <!-- End Header -->
 
-    <main id="main" style="margin-top: 60px;">
+    <main id="main" style="margin-top: 20px;">
         <div id="booking" class="section">
             <div class="section-center">
                 <div class="container" >
@@ -140,33 +140,51 @@
                                     </div>
                                 </div> -->
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <span class="form-label">Flying from</span>
-                                            <input class="form-control" type="text" placeholder="City or airport">
+                                            <span class="form-label">Vehicle</span>
+                                            <input class="form-control" type="text" placeholder="Vehicle name with registration no.">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <span class="form-label">Flyning to</span>
-                                            <input class="form-control" type="text" placeholder="City or airport">
+                                            <span class="form-label">Added Driver</span>
+                                            <input class="form-control" type="text" placeholder="Driver added to the vehicle">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="form-label">Quantity</span>
+                                            <input class="form-control" type="text" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="form-label">Odometer Reading</span>
+                                            <input class="form-control" type="text" placeholder="Odometer reading">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <span class="form-label">Departing</span>
+                                            <span class="form-label">Fill Date</span>
                                             <input class="form-control" type="date" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <span class="form-label">Returning</span>
-                                            <input class="form-control" type="date" required>
+                                            <span class="form-label">Amount</span>
+                                            <input class="form-control" type="text" placeholder="Amount">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Comment</span>
+                                            <input class="form-control" type="text" placeholder="Comment">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Adults (18+)</span>
                                             <select class="form-control">
@@ -176,8 +194,8 @@
                                             </select>
                                             <span class="select-arrow"></span>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2">
+                                    </div> 
+                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Children (0-17)</span>
                                             <select class="form-control">
@@ -187,10 +205,10 @@
                                             </select>
                                             <span class="select-arrow"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Travel class</span>
                                             <select class="form-control">
@@ -200,10 +218,10 @@
                                             </select>
                                             <span class="select-arrow"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-3">
                                         <div class="form-btn">
-                                            <button class="submit-btn">Show flights</button>
+                                            <button style="" class="submit-btn">Add Fuel</button>
                                         </div>
                                     </div>
                                 </div>

@@ -20,6 +20,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('addfuel/', views.AddFuel, name='addfuel'),
     path('driverbasic/', views.DriverBasic, name='driverbasic'),
+    path('driverconsignment/', views.DriverConsignment, name='driverconsignment'),
      
 
     # path('consignorReg/',views.ConsignorReg,name='ConsignorReg'),

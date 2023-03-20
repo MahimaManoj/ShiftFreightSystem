@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Shift Freight - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <!--<link href="{% static 'assets/img/favicon.png'%}" rel="icon">-->
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'css/driverconsignment.css' %}" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/book.css' %}" rel="stylesheet">
+    <script src="{% static 'js/book.js' %}" rel="stylesheet"></script>
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.book.css">
+    
+    <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.book.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard_theme_arrows.book.css"
+        rel="stylesheet" type="text/css" />
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.book.js"></script>
+
+
+
+        <style>
+            
+            table, th, td {
+            
+            border: 1px solid black;
+            
+            border-collapse: collapse;
+            
+            }
+            
+            th, td {
+            
+            padding: 10px;
+            width: 200px;
+            
+            }
+            
+            th {
+            
+            background-color: #6fa9c3;
+            
+            }
+            
+            td {
+            
+            background-color: #deeaef;
+            
+            }
+            colgroup {
+            
+            width: 600px;
+            
+            }
+            </style>
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" style="background-color: #1f3e5d;" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+            <a href="http://127.0.0.1:8000/" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1>Shift Freight</h1>
+            </a>
+
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accounts/driverhome/">Dashboard</a></li>
+
+                    <li><a href="">Profile</a></li>
+
+                    <li><a href="http://127.0.0.1:8000/accounts/viewfuel/">Fuel Management</a></li>
+
+                    <li><a href="http://127.0.0.1:8000/accounts/driverconsignment/" class="active">Consignment</a></li>
+
+                    <li class="dropdown"><a href="#"><span>{{user.name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul>
+                        <li><a href="">Logout</a></li>
+                      </ul>
+                    </li>
+
+                    <!-- <ul class="float-right">
+                      <li><a href="#">{{user.name}}</a>
+                <ul>
+                        <li><a href="/accounts/logout" >LOGOUT</a></li>
+                </ul>
+              </li>
+                      
+                  </ul> -->
+          
+
+                </ul>
+            </nav><!-- .navbar -->
+
+        </div>
+
+
+
+
+    </header><!-- End Header -->
+    <!-- End Header -->
+
+
+    <main id="main" style="margin-top: 100px;">
+
+
+        <div class="one">
+            <div class="container">
+                <h5>Consignment Summary</h5>
+            <form >
+                <div>
+                    <label for="bookingdate">Consignment Booking Date </label>
+                <input type="text" name="bookingdate" id="bookingdate">
+                </div>
+                
+                <div>
+                    <label for="billtype">Bill Type </label>
+                <select name="country" id="country">
+                    <option value="India">India</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value="Australia">Australia</option>
+                </select>
+                </div>
+                
+                <div>
+                    <label for="billdate">Challan/Invoice/Bill Date </label>
+                    <input type="text" name="billdate" id="billdate">
+                </div>
+                <div>
+                    <label for="billno">Challan/Invoice/Bill No </label>
+                <input type="text" name="billno" id="billno">
+                </div>
+                
+                <div>
+                    <label for="service">Service </label>
+                <input type="text" name="service" id="service">
+                </div>
+                
+                <div>
+                    <label for="valueofgoods">Value of Goods(Rs.) </label>
+                <input type="text" name="valueofgoods" id="valueofgoods">
+                </div>
+                
+                <div>
+                    <label for="from">From </label>
+                <input type="text" name="from" id="from">
+                </div>
+                
+                <div>
+                    <label for="to">To </label>
+                <input type="text" name="to" id="to">
+                </div>
+                
+                <div>
+                    <label for="paymentterms">Payment Terms </label>
+                <input type="text" name="paymentterms" id="paymentterms">
+                </div>
+                
+                <input type="submit" style="background-color: rgb(59, 148, 59);" value="Accept">
+            </form>
+            </div> 
+        </div>
+        
+        <div class="two">
+            two
+        </div>
+        
+        <div class="three">
+            <h5>Packing Summary</h5>
+            <form>
+                <div>
+                    <label for="packingsize">Packing Size </label>
+                    <input type="text" name="packingsize" id="packingsize">
+                </div>
+                <div>
+                    <label for="remarks">Remarks </label>
+                <input type="text" name="remarks" id="remarks">
+                </div>
+                
+                <div>
+                    <label for="packingmaterial">Packing Material </label>
+                <input type="text" name="packingmaterial" id="packingmaterial">
+                </div>
+                
+                <div>
+                    <label for="valueofgoods">Value of Goods(Rs.) </label>
+                <input type="text" name="valueofgoods" id="valueofgoods">
+                </div>
+                
+            </form>
+        </div>
+        
+
+    </main>
+</body>
+</html>
