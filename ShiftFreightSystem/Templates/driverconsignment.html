@@ -13,6 +13,7 @@
     <!-- Favicons -->
     <!--<link href="{% static 'assets/img/favicon.png'%}" rel="icon">-->
     <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,6 +80,13 @@
             width: 600px;
             
             }
+                    
+            .header{
+
+            height: 30px;
+
+            }
+
             </style>
 
 </head>
@@ -139,59 +147,60 @@
 
 
         <div class="one">
-            <div class="container">
+            <div class="div-container">
                 <h5>Consignment Summary</h5>
-            <form >
-                <div>
-                    <label for="bookingdate">Consignment Booking Date </label>
-                <input type="text" name="bookingdate" id="bookingdate">
-                </div>
-                
-                <div>
-                    <label for="billtype">Bill Type </label>
-                <select name="country" id="country">
-                    <option value="India">India</option>
-                    <option value="Sri Lanka">Sri Lanka</option>
-                    <option value="Australia">Australia</option>
-                </select>
-                </div>
-                
-                <div>
-                    <label for="billdate">Challan/Invoice/Bill Date </label>
-                    <input type="text" name="billdate" id="billdate">
-                </div>
-                <div>
-                    <label for="billno">Challan/Invoice/Bill No </label>
-                <input type="text" name="billno" id="billno">
-                </div>
-                
-                <div>
-                    <label for="service">Service </label>
-                <input type="text" name="service" id="service">
-                </div>
-                
-                <div>
-                    <label for="valueofgoods">Value of Goods(Rs.) </label>
-                <input type="text" name="valueofgoods" id="valueofgoods">
-                </div>
-                
-                <div>
-                    <label for="from">From </label>
-                <input type="text" name="from" id="from">
-                </div>
-                
-                <div>
-                    <label for="to">To </label>
-                <input type="text" name="to" id="to">
-                </div>
-                
-                <div>
-                    <label for="paymentterms">Payment Terms </label>
-                <input type="text" name="paymentterms" id="paymentterms">
-                </div>
-                
-                <input type="submit" style="background-color: rgb(59, 148, 59);" value="Accept">
-            </form>
+                <form >
+                    <div>
+                        <label for="bookingdate">Consignment Booking Date </label>
+                    <input type="text" name="bookingdate" id="bookingdate">
+                    </div>
+                    
+                    <div>
+                        <label for="billtype">Bill Type </label>
+                        <select name="country" id="country">
+                            <option value="India">India</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Australia">Australia</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="billdate">Challan/Invoice/Bill Date </label>
+                        <input type="text" name="billdate" id="billdate">
+                    </div>
+
+                    <div>
+                        <label for="billno">Challan/Invoice/Bill No </label>
+                        <input type="text" name="billno" id="billno">
+                    </div>
+                    
+                    <div>
+                        <label for="service">Service </label>
+                        <input type="text" name="service" id="service">
+                    </div>
+                    
+                    <div>
+                        <label for="valueofgoods">Value of Goods(Rs.) </label>
+                        <input type="text" name="valueofgoods" id="valueofgoods">
+                    </div>
+                    
+                    <div>
+                        <label for="from">From </label>
+                        <input type="text" name="from" id="from">
+                    </div>
+                    
+                    <div>
+                        <label for="to">To </label>
+                        <input type="text" name="to" id="to">
+                    </div>
+                    
+                    <div>
+                        <label for="paymentterms">Payment Terms </label>
+                        <input type="text" name="paymentterms" id="paymentterms">
+                    </div>
+                    
+                    <input type="submit" style="background-color: rgb(59, 148, 59);" value="Accept">
+                </form>
             </div> 
         </div>
         

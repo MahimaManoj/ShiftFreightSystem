@@ -9,8 +9,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
-
-
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 
@@ -43,7 +42,6 @@ def registration(request):
         is_consignor = True
         
             
-
         if password==cpassword:
             # if Account.objects.filter(username=username).exists():
             #     messages.info(request,'username taken')
@@ -236,6 +234,15 @@ def activate(request, uidb64, token):
         return redirect('register')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def logout(request):
+    auth.logout(request)
+    return redirect('viewlogin')  
+
+
 def DriverConsignment(request):
     return render(request,'driverconsignment.html')
+
+def ConsignorProfile(request):
+    return render(request,'consignorprofile.html')
 

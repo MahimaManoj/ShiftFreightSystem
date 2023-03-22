@@ -14,13 +14,15 @@ urlpatterns = [
     path('consignorhome/',views.ConsignorHome,name='consignorhome'),
     path('viewfuel/',views.ViewFuel,name='viewfuel'),
     path('driverprofile/',views.DriverProfile,name='driverprofile'),
-     path('resetpassword_validate/<uidb64>/<token>/', views.resetpassword_validate, name='resetpassword_validate'),
+    path('resetpassword_validate/<uidb64>/<token>/', views.resetpassword_validate, name='resetpassword_validate'),
     path('forgotPassword/', views.forgotPassword, name='forgotPassword'),
     path('resetPassword/', views.resetPassword, name='resetPassword'),
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('addfuel/', views.AddFuel, name='addfuel'),
     path('driverbasic/', views.DriverBasic, name='driverbasic'),
     path('driverconsignment/', views.DriverConsignment, name='driverconsignment'),
+    path('logout/', views.logout, name='logout'),
+    path('consignorprofile/', views.ConsignorProfile, name='consignorprofile'),
      
 
     # path('consignorReg/',views.ConsignorReg,name='ConsignorReg'),

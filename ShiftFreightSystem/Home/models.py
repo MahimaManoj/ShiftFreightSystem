@@ -26,3 +26,18 @@ class Driver(models.Model):
     driver_image = models.ImageField()
     def __str__(self):
             return self.driver_name
+    
+
+class FuelManagement(models.Model):
+    fuel_id = models.AutoField(primary_key=True)
+    vehicle_id = models.ForeignKey(vehicle, on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    fuel_quantity = models.CharField(max_length=200)
+    odometer_reading = models.CharField(max_length=200)
+    fill_date = models.DateField()
+    amount = models.CharField(max_length=200)
+    comment = models.CharField(max_length=200)
+    def __str__(self):
+            return self.fuel_id
+
+

@@ -93,6 +93,7 @@
           <div class="col-lg-7" >
             <form action="{%url 'registration' %}" method="post" onsubmit="return nameValidate() && cityValidate() && phoneValidation() && emailValidation() && passwordValidation() && confirmpasswordValidation() && addressValidation() && pincodeValidation()"  >
               {% csrf_token %}
+              {% include 'message.html' %}
               <center><h3>Registration</h3></center>
               <br>
               <!-- <p>Our effectual services have always helped us in taking the packing and relocation business to the great heights, ensuring to move forward and achieve many accreditations and accolades in various fields.</p> -->

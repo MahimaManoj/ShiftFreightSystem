@@ -13,6 +13,7 @@
   <!-- Favicons -->
   <!--<link href="{% static 'assets/img/favicon.png'%}" rel="icon">-->
   <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,115 +31,95 @@
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{% static 'assets1/img/favicon/favicon.ico' %}" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet">
-
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="{% static 'assets1/vendor/css/core.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets1/vendor/css/theme-default.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets1/css/demo.css' %}" />
-
   <!-- =======================================================
   * Template Name: Logis - v1.2.0
   * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"5b2e3fe765f5a6688435d709ebae5ab7","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
 <style>
-#header{
-  height: 10px;
-}
-.container{
-  margin-top: 8pc;
-  margin-left: 100px;
-}
-.card-deck{
-  margin-top: 3pc;
-}
-.card{
-    height: fit-content;
-    margin-top: 30px;
-}
-
+  .header{
+    height: 30px;
+  }
 </style>
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center fixed-top" style="background-color: rgba(16, 8, 125, 0.114);" >
+  <header id="header" style="background-color: #1b1e4d;" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="http://127.0.0.1:8000/" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Shift Freight</h1>
-      </a>
+        <a href="http://127.0.0.1:8000/" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1>Shift Freight</h1>
+        </a>
 
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="27.0.0.1:8000/consignor/consignorhome/" class="active">Home</a></li>
-          <li><a href="" class="active">Profile</a></li>
-          
-          <li class="dropdown"><a href="#"><span>Bookings</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <nav id="navbar" class="navbar">
             <ul>
-              <li><a href="http://127.0.0.1:8000/accounts/book/">Make Booking</a></li>
-              <!-- <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> -->
-              <li><a href="">View Booking</a></li>
-            </ul> 
-          </li>
-          <!-- <li><a href="http://127.0.0.1:8000/contact/">Contact</a></li> -->
+                <li><a href="http://127.0.0.1:8000/accounts/consignorhome/" class="active">Dashboard</a></li>
 
-          <!-- <li class="dropdown"><a href="#"><span>Booking Summary</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <li><a href="">Profile</a></li>
+
+                <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
+                <li class="dropdown"><a href="">Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                  <ul>
+                    <li><a href="http://127.0.0.1:8000/accounts/book/">Book Truck</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/book/">View Bookings</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown"><a href="#"><span>{{user.name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                  <ul>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                  </ul>
+                </li>
+
+                <!-- <ul class="float-right">
+                  <li><a href="#">{{user.name}}</a>
             <ul>
-              <li><a href="">Driver details</a></li>
-               <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> 
-              <li><a href="">Vehicle details</a></li>
-            </ul>
-          </li> -->
-          <li><a href="" class="active">Payment</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Truck Management</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="http://127.0.0.1:8000/register/addvehicle/">Add Truck</a></li>
-               <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> 
-              <li><a href="">All Truck</a></li>
-            </ul>
-          </li> -->
-          <li class="dropdown">{%for i in user1 %}<a href="#"><i class="fa-solid fa-truck">&nbsp</i>&nbsp<span>{{i.com_name}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>{% endfor %}
-            <ul>
-              <li><a href="">View Profile</a></li>
-              <!-- <li><a href="http://127.0.0.1:8000/register/driver/">Driver</a></li> -->
-              
-              
+                    <li><a href="/accounts/logout" >LOGOUT</a></li>
             </ul>
           </li>
-          
-        </ul>
-      </nav><!-- .navbar -->
+                  
+              </ul> -->
+      
+
+            </ul>
+        </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+
+</header><!-- End Header -->
+  <!-- End Header -->
+
   <!-- ======= Hero Section ======= -->
+  <div>
   <section id="hero" class="hero d-flex align-items-center">
     <div class="container">
       <div class="row gy-4 d-flex justify-content-between">
-        <div class="card" style="width: 50rem; background-color: rgba(52, 65, 118, 0.541);">
-          <div class="card-body">
-            <h5 class="card-title">Welcome to Shift Freight &#127881;</h5>
-            <h6 class="card-subtitle mb-2 text-muted"></h6>
-            <p class="card-text">Shift Freight is the one stop solution for your transport requirements.</p>
-            <!-- <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a> -->
-           </div>
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h2 data-aos="fade-up">One stop solution for your transport requirements</h2>
+          <p data-aos="fade-up" data-aos-delay="100">We the best Packers and Movers In India, transportation company use the international quality packing materials to protect your goods from damage, moisture or dust.</p>
+
+          <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+            <!-- <input type="text" class="form-control" placeholder="Place your Mobile No. for quick enquiry">
+            <button type="submit" class="btn btn-primary">Quote</button> -->
+          </form>
         </div>
 
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
@@ -147,23 +128,24 @@
 
       </div>
     </div>
-  </section><!-- End Hero Section -->
-  <!-- <div class="container">
-  
-  </div>
-  <div class="card-deck">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Booking</h5>
-      <p class="card-text">0</p>
-      <a href="#" class="btn btn-primary">View</a>
-    </div>
-  </div>
-  </div>
-
-</div> --> 
-
-
+  </section>
 </div>
+
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
 </body>
 </html>

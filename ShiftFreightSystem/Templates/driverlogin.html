@@ -73,12 +73,15 @@
 							
 								<h6>Enter your phone number to login.</h6>
 							<br>
-									
+								
 							<form action="{% url 'driverlogin' %}" method="post"  autocomplete="off" id="drform" class="login-form">
 								{% csrf_token %}
+    							{{ form.as_p }}
 								<div class="form-group">
-									<input type="text" class="form-control rounded-left" id="phone" name="phone" placeholder="phone" required>
-								</div>
+									<label for="{{ form.otp_token.id_for_label }}">OTP Token</label>
+									{{ form.otp_token }}
+								  </div>
+								  <button type="submit" class="btn btn-primary">Login</button>
 								<!-- <div class="form-group d-flex">
 									<input type="password" class="form-control rounded-left" name="password" id="password" placeholder="Password" required>
 								</div> -->
@@ -101,4 +104,6 @@
 
 	</body>
 </html>
+
+
 
