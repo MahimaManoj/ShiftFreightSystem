@@ -10,6 +10,18 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.views.decorators.cache import cache_control
+import random
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from twilio.rest import Client
+from random import randint
+from Home.models import Driver 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+# sample phone number and driver information
+# driver_info = {'name': 'John Doe', 'phone_number': '6238452'}
 
 # Create your views here.
 
@@ -22,7 +34,6 @@ def DriverHome(request):
 
 def ConsignorHome(request):
     return render(request,'consignorhome.html')
-
 
 
 def registration(request):
@@ -94,8 +105,6 @@ def viewlogin(request):
                 return redirect('http://127.0.0.1:8000/admin/')
             if user.is_consignor:
                 return redirect('consignorhome')
-            elif user.is_driver:
-                return redirect('driverhome')   
             else:
                 return redirect('home')
         else:
@@ -119,14 +128,16 @@ def ConsignorHome(request):
     return render(request, 'consignorhome.html')
 
 
-def DriverLogin(request):
-    return render(request,'driverlogin.html')
+
 
 
 # def logout(request):
 #     auth.logout(request)
 #     return redirect('login')
 
+
+def ViewBooking(request):
+    return render(request,'viewbooking.html')
 
 def Book(request):
     return render(request,'book.html')
@@ -246,3 +257,128 @@ def DriverConsignment(request):
 def ConsignorProfile(request):
     return render(request,'consignorprofile.html')
 
+
+
+# @csrf_exempt
+# def send_otp(request):
+#     if request.method == 'POST':
+#         phone_number = request.POST.get('phone_number')
+#         otp = str(randint(100000, 999999))  # generate a 6-digit OTP
+#         message = f'Your OTP is {otp}. Do not share it with anyone.'
+#         try:
+#             # replace with your Twilio phone number and sender ID
+#             client.messages.create(to=phone_number, from_='your_twilio_phone_number_here', body=message)
+#             return JsonResponse({'status': 'success', 'message': 'OTP sent successfully.'})
+#         except:
+#             return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again later.'})
+        
+
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from twilio.rest import Client
+from random import randint
+
+# replace with your account SID and auth token
+account_sid = 'AC7f2e8405cadd90f61d8bbe9ad4ece979'
+auth_token = '21f1032bfd96fa8ebe09f054cc9c8197'
+client = Client(account_sid, auth_token)
+
+@csrf_exempt
+def send_otp(request):
+    ph = DriverLogin.objects.filter(phone_number=True)
+    if request.method == 'POST':
+        phone_number = request.POST.get('phone_number')
+        otp = str(randint(100000, 999999))  # generate a 6-digit OTP
+        message = f'Your OTP is {otp}. Do not share it with anyone.'
+        try:
+            # replace with your Twilio phone number and sender ID
+            client.messages.create(to=phone_number, from_='+15155828771', body=message)
+            return JsonResponse({'status': 'success', 'message': 'OTP sent successfully.'})
+        except:
+            return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again later.'})
+
+
+
+# def generate_otp():
+#     otp = random.randint(100000, 999999)
+#     return otp
+
+
+# function to send OTP via SMS
+# def send_otp_via_sms(phone_number, otp):
+#     print(f'Sending OTP {otp} to {phone_number} via SMS...')
+
+# # function to verify OTP
+# def verify_otp(otp, user_input):
+#     if str(otp) == user_input:
+#         return True
+#     else:
+#         return False
+
+# # main function for OTP login
+# def otp_login(driver_info):
+#     phone_number = driver_info['phone_number']
+#     otp = generate_otp()
+#     send_otp_via_sms(phone_number, otp)
+#     user_input = input('Enter OTP received via SMS: ')
+#     if verify_otp(otp, user_input):
+#         print(f'Welcome {driver_info["name"]}!')
+#     else:
+#         print('Invalid OTP. Please try again.')
+
+# # test OTP login function
+# otp_login(driver_info)
+
+
+# def Driverlog(request):
+#     if request.method == 'POST':
+#         phone_number = request.POST['phone_number']
+#         print(phone_number)
+#         user=auth.authenticate(phone=phone_number)
+#         print(user)
+
+#         if user is not None:
+#             #login(user)
+#             auth.login(request, user)
+#             # save email in session
+#             request.session['phone_number'] = phone_number
+
+#             if user.is_driver:
+#                 return redirect('driverhome')
+#             else:
+#                 return redirect('drlog')
+#         else:
+#             # messages.error(request, 'Invalid Credentials')
+#             return redirect('drlog') 
+
+#     return render(request,'drlog.html')
+
+
+
+def Driverlog(request):
+ 
+    if request.method == 'POST':
+        user=request.user
+        print(user)
+        phone_number = request.POST['phone_number']
+        print(phone_number)
+        if(Account.objects.filter(phone=phone_number)):
+            log=Account.objects.filter(phone=phone_number).values('role').get()['role']
+            print(log)
+            if log == 'is_driver':
+               a=Driver.objects.create(acc=user,driver_phone=phone_number)  
+               a.save()
+               return redirect('driverhome')  
+            else:
+            #    messages.success(request,'Access Denied!!!')
+               return redirect('drlog')    
+        else:
+            # messages.success(request, 'Access Denied!!!')
+            return redirect('drlog') 
+    ann=Account.objects.filter(is_driver=True)         
+    return render(request,'drlog.html',{'ann':ann}) 
+
+
+def Driverotp(request):
+    return render(request,'drotp.html')

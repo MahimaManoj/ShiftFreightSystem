@@ -123,45 +123,30 @@
                     <div class="row" >
                         <div class="booking-form">
                             <form action="{%url 'addfuel' %}" method="post" >
-                                <!-- <div class="form-group">
-                                    <div class="form-checkbox">
-                                        <label for="roundtrip">
-                                            <input type="radio" id="roundtrip" name="flight-type">
-                                            <span></span>Roundtrip
-                                        </label>
-                                        <label for="one-way">
-                                            <input type="radio" id="one-way" name="flight-type">
-                                            <span></span>One way
-                                        </label>
-                                        <label for="multi-city">
-                                            <input type="radio" id="multi-city" name="flight-type">
-                                            <span></span>Multi-City
-                                        </label>
-                                    </div>
-                                </div> -->
+                               
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Vehicle</span>
-                                            <input class="form-control" type="text" placeholder="Vehicle name with registration no.">
+                                            <input class="form-control" name="regno" type="text" placeholder="Vehicle registration no.">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Added Driver</span>
-                                            <input class="form-control" type="text" placeholder="Driver added to the vehicle">
+                                            <input class="form-control" type="text" name="drivername" placeholder="Driver added to the vehicle">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Quantity</span>
-                                            <input class="form-control" type="text" placeholder="Quantity">
+                                            <input class="form-control" type="text" name="fuel_quantity" placeholder="Quantity">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Odometer Reading</span>
-                                            <input class="form-control" type="text" placeholder="Odometer reading">
+                                            <input class="form-control" type="text" name="odometer_reading" placeholder="Odometer reading">
                                         </div>
                                     </div>
                                 </div>
@@ -169,56 +154,23 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Fill Date</span>
-                                            <input class="form-control" type="date" required>
+                                            <input class="form-control" type="date" name="fill_date" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <span class="form-label">Amount</span>
-                                            <input class="form-control" type="text" placeholder="Amount">
+                                            <input class="form-control" type="text" name="amount" placeholder="Amount">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <span class="form-label">Comment</span>
-                                            <input class="form-control" type="text" placeholder="Comment">
+                                            <input class="form-control" type="text" name="comment" placeholder="Comment">
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="form-label">Adults (18+)</span>
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                            <span class="select-arrow"></span>
-                                        </div>
-                                    </div> 
-                                     <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="form-label">Children (0-17)</span>
-                                            <select class="form-control">
-                                                <option>0</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                            </select>
-                                            <span class="select-arrow"></span>
-                                        </div>
-                                    </div> -->
-                                </div>
-                                <div class="row">
-                                    <!-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="form-label">Travel class</span>
-                                            <select class="form-control">
-                                                <option>Economy class</option>
-                                                <option>Business class</option>
-                                                <option>First class</option>
-                                            </select>
-                                            <span class="select-arrow"></span>
-                                        </div>
-                                    </div> -->
+                                   
+                                
                                     <div class="col-md-3">
                                         <div class="form-btn">
                                             <button style="" class="submit-btn">Add Fuel</button>

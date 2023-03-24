@@ -71,7 +71,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
     id            = models.AutoField(primary_key=True)
     name          = models.CharField(max_length=100, default='')
-    phone         = models.BigIntegerField(default=0)
+    phone         = models.BigIntegerField(default=0,unique=True)
     email         = models.EmailField(max_length=100, unique=True)
     address1      = models.CharField(max_length=100, default='')
     address2      = models.CharField(max_length=100, default='')
@@ -117,3 +117,30 @@ class Account(AbstractBaseUser,PermissionsMixin):
     def has_module_perms(self, add_label):
         return True
     
+
+
+class PickAddress(models.Model):
+    pick_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
+    p_city = models.CharField(max_length=100)
+    p_address1 = models.CharField(max_length=100)
+    p_address2 = models.CharField(max_length=100)
+    p_district = models.CharField(max_length=100)
+    p_state = models.CharField(max_length=100)
+    p_pincode = models.CharField(max_length=100)
+    def __str__(self):
+        return self.p_city
+
+
+class DropAddress(models.Model):
+    drop_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
+    d_city = models.CharField(max_length=100)
+    d_address1 = models.CharField(max_length=100)
+    d_address2 = models.CharField(max_length=100)
+    d_district = models.CharField(max_length=100)
+    d_state = models.CharField(max_length=100)
+    d_pincode = models.CharField(max_length=100)
+    def __str__(self):
+        return self.d_city
+

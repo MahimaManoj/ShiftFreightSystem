@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Driver OTP Login</title>
+</head>
+<body>
+	<h1>User Driver OTP Login</h1>
+	<form  method="POST" action="{% url 'drlog' %}">
+        {% csrf_token %}
+		<label for="phone_number">Phone Number:</label>
+		<input type="tel" id="phone_number" name="phone_number" required>
+	
+		    {% if ann.is_driver %}
+		       <button type="submit" onclick="sendOTP()">Send OTP</button>	
+		    {% else %} 
+		       <button type="submit" onclick="Driver()" >Submit</button>	  
+		    {% endif %}  
+	</form>
+	<script>
+		function Driver() {
+			// Code to send OTP to the phone number entered
+			alert("User is not a driver.");
+		}
+		function sendOTP() {
+			// Code to send OTP to the phone number entered
+			alert("OTP sent to phone number.");
+		}
+
+		
+	</script>
+</body>
+</html>
+
+
+
+
+

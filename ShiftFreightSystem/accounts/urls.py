@@ -5,7 +5,6 @@ from . import views
 urlpatterns = [
     path('Reg/',views.registration,name='registration'),
     path('viewlogin/',views.viewlogin,name='viewlogin'),
-    path('driverlogin/',views.DriverLogin,name='driverlogin'),
     path('booking1/',views.Booking1,name='booking1'),
     path('booking2/',views.Booking2,name='booking2'),
     path('booking3/',views.Booking3,name='booking3'),
@@ -23,8 +22,11 @@ urlpatterns = [
     path('driverconsignment/', views.DriverConsignment, name='driverconsignment'),
     path('logout/', views.logout, name='logout'),
     path('consignorprofile/', views.ConsignorProfile, name='consignorprofile'),
+    path('drlog/', views.Driverlog, name='drlog'),
+    path('drotp/', views.Driverotp, name='drotp'),
+    path('viewbooking/', views.ViewBooking, name='viewbooking'),
      
-
+     
     # path('consignorReg/',views.ConsignorReg,name='ConsignorReg'),
     # path('commonmanReg/',views.CommonManReg,name='CommonManReg'),
 
