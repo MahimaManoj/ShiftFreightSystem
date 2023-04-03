@@ -45,6 +45,26 @@
             
 
         }
+        .div1{
+          padding-top: 6pc;
+        }
+        .div2{
+          position: fixed;
+          padding-top: 3pc;
+          right: 400px;
+        }
+        .div3 {
+        position: fixed;
+        top: 70%;
+        right: 100px;
+        transform: translateY(-50%);
+        /* background-color: blue; */
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
     </style>
   </head>
   <body>
@@ -68,7 +88,7 @@
                     <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
                     <li class="dropdown"><a href="">Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
                       <ul>
-                        <li><a href="http://127.0.0.1:8000/accounts/book/">Book Truck</a></li>
+                        <li><a href="http://127.0.0.1:8000/accounts/pin/">Book Truck</a></li>
                         <li><a href="http://127.0.0.1:8000/accounts/viewbooking/">View Bookings</a></li>
                       </ul>
                     </li>
@@ -103,29 +123,60 @@
           <form action="{% url 'pin' %}" method="post">
 
       {% csrf_token %}
-      <!-- <label for="pincode">Enter a pincode:</label>
-      <input type="text" id="pincode" name="pincode">
-      <input type="submit" value="Get Information"> -->
-
      
+
       <div class="row">
         <div class="col-md-3">
-          <input type="text" id="pickup_pincode" name="pickup_pincode" class="form-control" placeholder="Enter the pickup locations pincode">
+          <input type="text" id="pickup_pincode" name="pickup_pincode" class="form-control" placeholder="Enter the pickup locations pincode"  >
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-primary mb-2">Check pincode</button>
         </div>
+        <div class="col-md-2">
+          <i class="fa fa-arrows-h" style="font-size:36px"></i>
+        </div>
+        
         <div class="col-md-3">
           <input type="text" id="delivery_pincode" name="delivery_pincode" class="form-control" placeholder="Enter the delivery locations pincode">
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-primary mb-2">Check pincode</button>
         </div>
-      </div>
-
-           
+      </div>     
     </center>
     </form>
+
+    
+    <div class="div1">
+      {% if pickup_information %}
+      <h6>City : {{ pickup_information.Name }}</h6>
+      <h6>District : {{ pickup_information.District }}</h6>
+      <br>
+      <p style="color: green"><b>Valid Pincode.</b></p>
+      {% endif %}
+      <!-- {% if not pickup_information %}
+      <p style="color: red;">Enter a valid Pincode.</p>
+      {% endif %} -->
+    </div>
+
+    <div class="div2">
+      {% if delivery_information %}
+      <h6>City : {{ delivery_information.Name }}</h6>
+      <h6>District : {{ delivery_information.District }}</h6>
+      <br>
+      <p style="color: green"><b>Valid Pincode.</b></p>
+      <a href="http://127.0.0.1:8000/accounts/book/"><button type="submit" class="btn btn-primary mb-2">Proceed to Booking</button></a>
+
+      {% endif %}
+      <!-- {% if not pickup_information %}
+      <p style="color: red;">Enter a valid Pincode.</p>
+      {% endif %} -->
+    </div>
+    
+    <!-- <button type="submit" class="btn btn-primary mb-2">Proceed to checkout</button> -->
+    
+    </div>
+    
 </div>
   </body>
 </html>

@@ -96,7 +96,7 @@
                 <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
                 <li class="dropdown"><a href="" >Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
-                    <li><a href="http://127.0.0.1:8000/accounts/book/" class="active">Book Truck</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/pin/" class="active">Book Truck</a></li>
                     <li><a href="http://127.0.0.1:8000/accounts/viewbooking/">View Bookings</a></li>
                   </ul>
                 </li>
@@ -142,16 +142,16 @@
                             <h4 class="text-right">Pick up Details </h4>
                         </div>
                         
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             
                           <div class="col-md-7">
                             <label class="labels">check pickup availability.</label>
                             <input type="text" class="form-control"  name="p_pincod" value="" placeholder="enter pincode"  required>
                             <span id = "pin" style="color:rgb(255,0, 0,0.404);"></span>
                             <button onclick="pincodeValidation(this)" type="submit">Check</button>
-                          </div>
+                          </div> -->
                          
-                      </div>
+                  
                         <div class="row mt-3">
                             <div class="col-md-12">
                               <label class="labels">Enter the Pick Up City</label>
@@ -203,14 +203,15 @@
                                 </select>
                             </div>
                         </div><br>
-                        <!-- <div class="row mt-3">
+                        
+                        <div class="row mt-3">
                             
                             <div class="col-md-6">
                               <label class="labels">Postcode</label>
                               <input type="text" class="form-control"  name="p_pincod" value="" onkeyup="pincodeValidation(this)" required>
                               <span id = "pin" style="color:rgb(255,0, 0,0.404);"></span>
                             </div>
-                        </div> -->
+                        </div>
                         <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Update Profile</button></div> -->
                     </div>
                 </div>
@@ -224,7 +225,7 @@
                             <div class="col-md-6"><label class="labels">Name</label><input type="text" name="fname" class="form-control" placeholder="first name" value=""></div>
                             <div class="col-md-6"><label class="labels">Surname</label><input type="text" name="surname" class="form-control" value="" placeholder="surname"></div>
                         </div> -->
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             
                           <div class="col-md-7">
                             <label class="labels">check delivery availability.</label>
@@ -233,7 +234,7 @@
                             <button type="submit">Check</button>
                           </div>
                          
-                      </div>
+                      </div> -->
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Enter the Drop City</label><input type="text" name="d_cit" class="form-control" placeholder="Enter Drop city" value="" onkeyup="cityValidate(this)"  required>
                               <span id = "city" style="color:rgb(255,0, 0,0.404);"></span></div>
@@ -270,11 +271,11 @@
                                   </select>
                             </div>
                         </div><br>
-                        <!-- <div class="row mt-3">
+                        <div class="row mt-3">
                             
                             <div class="col-md-6"><label class="labels">Postcode</label><input type="text" name="d_pincod" class="form-control" value="" onkeyup="pincodeValidation(this)" required>
                               <span id = "pin" style="color:rgb(255,0, 0,0.404);"></span></div>
-                        </div><br> -->
+                        </div><br>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Book</button></div>
                     </div>
                 </div>
@@ -295,12 +296,12 @@
                               </select>
                         </div>
                         <div class="col-md-12"><label class="labels">Select Date</label>
-                          <input type="date" name="bookingdat" id = "bookingdat" class="form-control" min="2023-03-30" max="2024-05-30">
+                          <input type="date" name="bookingdat" id = "bookingdat" class="form-control" min="2023-03-30" max="2024-05-30" required>
                       
                         </div><br>
-                        <div class="col-md-12"><label class="labels">Estimated Weight</label><input type="text" name="weigh" class="form-control" placeholder="Estimated Weight" value=""></div><br>
+                        <div class="col-md-12"><label class="labels">Estimated Weight</label><input type="text" name="weigh" class="form-control" placeholder="Estimated Weight" value="" required></div><br>
                         <div class="form-group row gy-2">
-                            <label for="services">Services</label>
+                            <label for="services" >Services</label>
                 
                             <div class="form-check col-md-3">
                               <input class="form-check-input" type="checkbox" value="Loading" name="service" id="flexCheckDefault">

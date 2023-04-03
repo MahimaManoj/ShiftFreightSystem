@@ -119,11 +119,46 @@
                     </div>
                   </div>
                 </div>
+                
+                </form>
+            </div>
+
+
+            <div class="div2">
+                <form style="border-style: ridge;">
+                    <div class="consign">
+                    <h3>Driver Details</h3>
+                    <hr>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Driver Name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" value="{{b.dr_id.name}}" aria-label="readonly input example" readonly>
+                    </div>
+                    </div>
+                    <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Driver Phone</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" value="{{b.dr_id.phone}}" aria-label="readonly input example" readonly>
+                    </div>
+                    </div>
+                  <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Driver Address</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" value="{{b.dr_id.address1}}" aria-label="readonly input example" readonly>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Truck Assigned</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" value="{{b.veh_id.registeration_no}}" aria-label="readonly input example" readonly>
+                    </div>
+                  </div>
+                </div>
                 {% endfor %}
                 </form>
-
-
             </div>
+
+
         </div>
     </body>
 </html>

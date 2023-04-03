@@ -266,11 +266,11 @@ def addtruckdriver(request,boo_id):
             
         else:
             if  BTruck.objects.filter(dr_id=df).exists():
-              return HttpResponse("<script>alert('Driver on duty.');window.location='/accounts/addtruckdriver';</script>")
+              return HttpResponse("<script>alert('Driver on duty.');window.location='/accounts/addtruckdriver/<boo_id>';</script>")
             elif  BTruck.objects.filter(veh_id=tf).exists():
-              return HttpResponse("<script>alert('Vehicle on road.');window.location='/accounts/addtruckdriver';</script>")
+              return HttpResponse("<script>alert('Vehicle on road.');window.location='/accounts/addtruckdriver/<boo_id>';</script>")
             else:
-                None
+                return render('adminbooking')
            
 
     ve = CompanyTruck.objects.all()
@@ -279,6 +279,7 @@ def addtruckdriver(request,boo_id):
 
 def BookingSummary(request,boo_id):
     bs = BTruck.objects.filter(boo_id=boo_id)
+
     btr=BTruck.objects.get(boo_id=boo_id)
     idd=boo_id
     print(idd)
@@ -605,32 +606,42 @@ ENDPOINT ="https://api.postalpincode.in/pincode/"
 def pincode_view(request):
     if request.method == 'POST':
         pickup_pincode = request.POST.get('pickup_pincode')
-        # delivery_pincode = request.POST.get('delivery_pincode')
-        print(pickup_pincode)
+        delivery_pincode = request.POST.get('delivery_pincode')
 
         pin_start = str(670001)
         pin_end = str(695615)
 
-        if (pickup_pincode >= pin_start and pickup_pincode <= pin_end) :
-        # and (delivery_pincode >= pin_start and delivery_pincode <= pin_end): 
+        
+        if (pickup_pincode >= pin_start and pickup_pincode <= pin_end) : 
 
             pickup_response = requests.get(ENDPOINT + pickup_pincode )
             pickup_pincode_information = json.loads(pickup_response.text)
             pickup_information = pickup_pincode_information[0]['PostOffice'][0]
-            print(pickup_information)
-            
-            # delivery_response = requests.get(ENDPOINT + delivery_pincode )
-            # delivery_pincode_information = json.loads(delivery_response.text)
-            # delivery_information = delivery_pincode_information[0]['PostOffice'][0]
+            print("demooo",pickup_information)
 
             return render(request, 'pin.html', {
                 'pickup_information': pickup_information,
-                # 'delivery_information': delivery_information,
             })
-        else:
-            print(1)
-            return render(request, 'pin.html', {'error': 'Pincode not valid. Enter a pincode existing in Kerala.'})
+            
+        
+        elif (delivery_pincode >= pin_start and delivery_pincode <= pin_end):
+            delivery_response = requests.get(ENDPOINT + delivery_pincode )
+            delivery_pincode_information = json.loads(delivery_response.text)
+            delivery_information = delivery_pincode_information[0]['PostOffice'][0]
+            print("dell",delivery_information)
 
+            return render(request, 'pin.html', {
+                # 'pickup_information': pickup_information,
+                'delivery_information': delivery_information,
+            })
+        
+        return HttpResponse("<script>alert('Pincode valid.');window.location='/accounts/book/';</script>")
+        
+            
+        # else:
+        #     return HttpResponse("<script>alert('Pincode not valid. Enter a pincode existing in Kerala.');window.location='/accounts/book/';</script>")
+
+        
     return render(request, 'pin.html')
    
         
