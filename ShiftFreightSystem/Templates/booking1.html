@@ -91,7 +91,7 @@
             <ul>
                 <li><a href="http://127.0.0.1:8000/accounts/consignorhome/" >Dashboard</a></li>
 
-                <li><a href="">Profile</a></li>
+                <li><a href="http://127.0.0.1:8000/accounts/consignorprofile/">Profile</a></li>
 
                 <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
                 <li class="dropdown"><a href="" class="active">Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -128,26 +128,26 @@
     <div class="container">
         <h2>Enter the Pick Up Details</h2><br>
         <div class="form-group col-md-12">
-            <form action="{% url 'booking2' %}" method="post">
+            <form action="{% url 'booking1' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputPickUpCity">Enter the Pick Up City</label>
-                    <input type="text" class="form-control" id="inputPickUpCity" placeholder="Enter Pick Up city" autocomplete="on" name="pickcity" required>
+                    <input type="text" class="form-control" id="inputPickUpCity" placeholder="Enter Pick Up city" autocomplete="on" name="p_city" required>
                 </div>
                 </div><br>
                 <div class="form-group col-md-6">
                 <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="paddress1" required>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="p_address1" required>
                 </div><br>
                 <div class="form-group col-md-6">
                 <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment or floor" name="paddress2" required>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment or floor" name="p_address2" required>
                 </div><br>
                 <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputDistrict">District</label>
-                        <select name="pdistrict" class="form-control" required>
+                        <select name="p_district" class="form-control" required>
                             <option selected>Choose...</option>
                             <option value="Alappuzha">Alappuzha</option>
                             <option value="Ernakulam">Ernakulam</option>
@@ -167,14 +167,14 @@
                 </div><br>
                 <div class="form-group col-md-4">
                     <label for="inputState">State</label>
-                    <select id="inputState" name="pstate" class="form-control" required>
+                    <select id="inputState" name="p_state" class="form-control" required>
                     <option selected>Choose...</option>
                     <option value="Kerala">Kerala</option>
                     </select>
                 </div><br>
                 <div class="form-group col-md-2">
                     <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip" name="pzip" required>
+                    <input type="text" class="form-control" id="inputZip" name="p_pincode" required>
                 </div><br>
                 </div>
                 <!-- <div class="form-group">
@@ -185,7 +185,7 @@
                     </label>
                 </div>
                 </div> -->
-                <a href="http://127.0.0.1:8000/register/booking3/"><button class="btn btn-primary">Next</button></a>
+                <a href="http://127.0.0.1:8000/register/booking2/"><button class="btn btn-primary">Next</button></a>
             </form>
         </div>
         <!-- <div class="form-group col-md-6">

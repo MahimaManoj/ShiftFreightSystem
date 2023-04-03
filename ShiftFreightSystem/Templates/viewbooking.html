@@ -37,7 +37,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     (function(d, m){
         var kommunicateSettings = 
             {"appId":"5b2e3fe765f5a6688435d709ebae5ab7","popupWidget":true,"automaticChatOpenOnNavigation":true};
@@ -47,7 +47,7 @@
         window.kommunicate = m; m._globals = kommunicateSettings;
     })(document, window.kommunicate || {});
 /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
-</script>
+</script> -->
 <style>
   .header{
     height: 30px;
@@ -78,12 +78,12 @@
             <ul>
                 <li><a href="http://127.0.0.1:8000/accounts/consignorhome/" class="active">Dashboard</a></li>
 
-                <li><a href="">Profile</a></li>
+                <li><a href="http://127.0.0.1:8000/accounts/consignorprofile/">Profile</a></li>
 
                 <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
                 <li class="dropdown"><a href="">Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
-                    <li><a href="http://127.0.0.1:8000/accounts/booking1/">Book Truck</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/book/">Book Truck</a></li>
                     <li><a href="http://127.0.0.1:8000/accounts/viewbooking/">View Bookings</a></li>
                   </ul>
                 </li>
@@ -120,22 +120,38 @@
     
             <table class="table">
                 <tr>
-                    <td><b>Book id</b></td>
+                    <td><b>#</b></td>
                     <td><b>Pickup City</b></td>
                     <td><b>Drop City</b></td>
                     <td><b>Type of Goods</b></td>
                     <td><b>Booking Date</b></td>
                     <td><b>Status</td>
+                    <td><b>View Booking</td>
                 </tr>
-                {% for book in booking %}
+                {% for t in vbt %}
+                
                 <tr>
-                    <td>{{booking.id}}</td>
-                    <td>{{booking.pickcity}}</td>
-                    <td>{{booking.dropcity}}</td>
-                    <td>{{booking.goodtype}}</td>
-                    <td>{{booking.date}}</td>
+                    <td>#</td>
+                    <td>{{t.p_cit}}</td>
+                    <td>{{t.d_cit}}</td>
+                    <td>{{t.good_typ}}</td>
+                    <td>{{t.bookingdat}}</td>
+                    <td>
+                      {% if t.statu == 'Approved' %}
+                            <button class="button btn btn-success" >{{t.statu}}</button></t>
+                      {% else %}            
+                            <button class="button btn btn-info" >{{t.statu}}</button> 
+                      {% endif %}
+                      
+                    </td>
+                    <td>
+                      {% if t.statu == 'Approved' %}
+                      <a href=""><button class="button btn btn-primary">View details</button></a>
+                      {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
+                
             </table>
             <!-- <form action="{% url 'booking2' %}" method="">
                 {% csrf_token %}

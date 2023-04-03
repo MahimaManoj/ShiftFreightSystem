@@ -4,6 +4,11 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin, AbstractUser
 import datetime
+# from Home.models import vehicle
+from Home.models import CompanyTruck
+import datetime
+
+
 
 
 class MyAccountManager(BaseUserManager):
@@ -97,6 +102,8 @@ class Account(AbstractBaseUser,PermissionsMixin):
     is_staff      = models.BooleanField(default=False) 
     is_superadmin     = models.BooleanField(default=False) 
 
+    is_booked = models.BooleanField(default=False)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phone', 'address1','address2','city','state','pincode','district','is_consignor']
@@ -119,28 +126,54 @@ class Account(AbstractBaseUser,PermissionsMixin):
     
 
 
-class PickAddress(models.Model):
-    pick_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
-    p_city = models.CharField(max_length=100)
-    p_address1 = models.CharField(max_length=100)
-    p_address2 = models.CharField(max_length=100)
-    p_district = models.CharField(max_length=100)
-    p_state = models.CharField(max_length=100)
-    p_pincode = models.CharField(max_length=100)
+class BTruck(models.Model):
+    statu = (
+        ('Approved','Approved'),
+        ('Pending','Pending'), 
+        ('None','None')
+    )
+    good_typ = (
+        ('Household','Household'),
+        ('Beverages','Beverages'),
+        ('Paints','Paints'),
+        ('Steel','Steel'),
+        ('Electronics','Electronic'),
+        ('others','others'),
+        ('None','None')
+    )
+    service =(
+        ('Loading','Loading'),
+        ('Unloading','Unloading'),
+        ('Cardboard Packing','Cardboard Packing'),
+        ('Storage','Storage')
+
+    )
+    boo_id = models.AutoField(primary_key=True)
+    us_id = models.ForeignKey(Account,related_name='consignor', on_delete=models.CASCADE)
+    dr_id =models.ForeignKey(Account,related_name='driver', on_delete=models.CASCADE,null = True)
+    veh_id = models.ForeignKey(CompanyTruck,on_delete=models.CASCADE,null=True)
+    p_cit = models.CharField(max_length=100)
+    p_addres1 = models.CharField(max_length=100)
+    p_addres2 = models.CharField(max_length=100)
+    p_distric = models.CharField(max_length=100)
+    p_stat = models.CharField(max_length=100)
+    p_pincod = models.CharField(max_length=100)
+    d_cit = models.CharField(max_length=100)
+    d_addres1 = models.CharField(max_length=100)
+    d_addres2 = models.CharField(max_length=100)
+    d_distric = models.CharField(max_length=100)
+    d_stat = models.CharField(max_length=100)
+    d_pincod = models.CharField(max_length=100)
+    good_typ = models.CharField(max_length=50,choices=good_typ,default='None')
+    bookingdat = models.DateTimeField()
+    weigh = models.CharField(max_length=100)
+    service = models.CharField(max_length=50,choices=service,default='None')
+    load_descriptio = models.CharField(max_length=100)
+    statu = models.CharField(choices=statu,max_length=100,default='Pending')
     def __str__(self):
-        return self.p_city
+        return "%s - %s - %s"%(self.p_cit,self.d_cit,self.statu)
+   
 
 
-class DropAddress(models.Model):
-    drop_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
-    d_city = models.CharField(max_length=100)
-    d_address1 = models.CharField(max_length=100)
-    d_address2 = models.CharField(max_length=100)
-    d_district = models.CharField(max_length=100)
-    d_state = models.CharField(max_length=100)
-    d_pincode = models.CharField(max_length=100)
-    def __str__(self):
-        return self.d_city
+
 

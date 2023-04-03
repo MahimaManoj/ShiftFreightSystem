@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account
+from .models import Account, BTruck
 from django.contrib.auth.models import Group
 # Register your models here.
 
@@ -28,3 +28,17 @@ class RegAdmin(admin.ModelAdmin):
     list_display = ['name','email','phone','address2','city','pincode','district','role']
     actions = [export_reg]
 admin.site.register(Account,RegAdmin)
+
+
+# admin.site.register(BTruck)
+
+class BookAdmin(admin.ModelAdmin):
+    list_display = ['p_cit','d_cit','statu']
+    def has_add_permission(self,request):
+        return False 
+    
+admin.site.register(BTruck,BookAdmin)
+
+     
+
+

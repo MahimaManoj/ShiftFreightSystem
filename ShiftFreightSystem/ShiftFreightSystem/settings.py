@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'rest_framework',
 
 ]
+JAZZMIN_SETTINGS = {
+    "site_header": "Shift Freight",
+    "site_brand": "Shift Freight",
 
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -91,9 +95,6 @@ DATABASES = {
 
 AUTH_USER_MODEL='accounts.Account'
 
-TWILIO_ACCOUNT_SID = 'AC7f2e8405cadd90f61d8bbe9ad4ece979'
-TWILIO_AUTH_TOKEN = '21f1032bfd96fa8ebe09f054cc9c8197'
-TWILIO_NUMBER = '+15155828771'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

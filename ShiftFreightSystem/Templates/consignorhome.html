@@ -31,23 +31,7 @@
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Logis - v1.2.0
-  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  <script type="text/javascript">
-    (function(d, m){
-        var kommunicateSettings = 
-            {"appId":"5b2e3fe765f5a6688435d709ebae5ab7","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
-</script>
+ 
 <style>
   .header{
     height: 30px;
@@ -73,12 +57,12 @@
             <ul>
                 <li><a href="http://127.0.0.1:8000/accounts/consignorhome/" class="active">Dashboard</a></li>
 
-                <li><a href="">Profile</a></li>
+                <li><a href="http://127.0.0.1:8000/accounts/consignorprofile/">Profile</a></li>
 
                 <!-- <li><a href="http://127.0.0.1:8000/accounts/book/">Booking</a></li> -->
                 <li class="dropdown"><a href="">Booking<i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
-                    <li><a href="http://127.0.0.1:8000/accounts/booking1/">Book Truck</a></li>
+                    <li><a href="http://127.0.0.1:8000/accounts/book/">Book Truck</a></li>
                     <li><a href="http://127.0.0.1:8000/accounts/viewbooking/">View Bookings</a></li>
                   </ul>
                 </li>
