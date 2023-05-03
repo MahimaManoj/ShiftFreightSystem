@@ -5,9 +5,6 @@ from . import views
 urlpatterns = [
     path('Reg/',views.registration,name='registration'),
     path('viewlogin/',views.viewlogin,name='viewlogin'),
-    path('booking1/',views.Booking1,name='booking1'),
-    path('booking2/',views.Booking2,name='booking2'),
-    path('booking3/',views.Booking3,name='booking3'),
     path('book/',views.Book1,name='book'),
     path('driverhome/',views.DriverHome,name='driverhome'),
     path('consignorhome/',views.ConsignorHome,name='consignorhome'),
@@ -33,6 +30,7 @@ urlpatterns = [
     path('pin/', views.pincode_view, name='pin'),
     path('bookingsummary/<boo_id>/', views.BookingSummary, name='bookingsummary'),
     path('addfueldemo/', views.AddFuelDemo, name='addfueldemo'),
+    # path('addfueldemo/', views.AddFuelDemo, name='addfueldemo'),
      
     # path('consignorReg/',views.ConsignorReg,name='ConsignorReg'),
     # path('commonmanReg/',views.CommonManReg,name='CommonManReg'),

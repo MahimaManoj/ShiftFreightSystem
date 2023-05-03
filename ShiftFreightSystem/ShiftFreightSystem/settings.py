@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
 
+    'location_field.apps.DefaultConfig',
+
 ]
 JAZZMIN_SETTINGS = {
     "site_header": "Shift Freight",
@@ -154,3 +156,13 @@ SERVER_EMAIL = 'jobportalajce@gmail.com'
 EMAIL_HOST_PASSWORD = 'xmsusnizxvfoudlu'
 
 EMAIL_USE_TLS = True
+
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'search.provider': 'google',
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': 'AIzaSyAtDBI_DGeh1WZEejPVXosbD1NL1KqLNOo',
+    'provider.google.api_libraries': 'AIzaSyAtDBI_DGeh1WZEejPVXosbD1NL1KqLNOo',
+    'provider.google.map.type': 'ROADMAP',
+}

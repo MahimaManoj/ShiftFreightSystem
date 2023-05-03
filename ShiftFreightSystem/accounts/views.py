@@ -170,26 +170,13 @@ def Book1(request):
         weigh=request.POST['weigh']
         service=request.POST.getlist('service')
         load_descriptio=request.POST['load_descriptio']
+       
 
         pincode = p_pincod or d_pincod
         
         if request.method == 'POST':
-            pincode = request.POST.get('pincode')
-            if pincode >= PIN_START and pincode <= PIN_END:
-                response = requests.get(ENDPOINT + pincode)
-                pincode_information = json.loads(response.text)
-                information = pincode_information[0]['PostOffice'][0]
-                data = {}
-                for key, value in information.items():
-                    if key == 'Name' or key == 'District':
-                        data[key] = value
-                # return HttpResponse(json.dumps(data))
-                return data 
-            if (pincode == p_pincod):
-                return p_pincod 
-            elif(pincode == d_pincod):
-                return d_pincod 
             
+           
                 # raise ValueError("Pincode not valid. Enter a pincode existing in Kerala.")
 
             btr = BTruck.objects.create(
@@ -217,19 +204,6 @@ def Book1(request):
 
     return render(request,'book.html')
 
-
-
-def Booking1(request):
-
-    return render(request,'booking1.html')
-
-def Booking2(request):
-
-    return render(request,'booking2.html')
-
-def Booking3(request):
-
-    return render(request,'booking3.html')
 
 def ViewBooking(request):
     user=request.user.id
@@ -271,7 +245,6 @@ def addtruckdriver(request,boo_id):
               return HttpResponse("<script>alert('Vehicle on road.');window.location='/accounts/addtruckdriver/<boo_id>';</script>")
             else:
                 return render('adminbooking')
-           
 
     ve = CompanyTruck.objects.all()
     tt = Account.objects.filter(is_driver = True)
@@ -279,11 +252,16 @@ def addtruckdriver(request,boo_id):
 
 def BookingSummary(request,boo_id):
     bs = BTruck.objects.filter(boo_id=boo_id)
-
     btr=BTruck.objects.get(boo_id=boo_id)
     idd=boo_id
+    # latitude, longitude = None, None
+    # if bs.location:
+    #     latitude, longitude = bs.location.split(',')
+    #     print(latitude)
+    #     print(longitude)
     print(idd)
     return render(request,'bookingsummary.html',{'bs':bs,"idd":idd})
+    # ,'latitude':latitude,'longitude':longitude
 
 def AdminFreight(request):
     us=Account.objects.filter(is_consignor=True)
@@ -293,7 +271,7 @@ def AdminFreight(request):
     driver = Account.objects.filter(is_driver=True)
     drivers = driver.count()
     return render(request, 'adminfreight.html',{'users':users,'book':book,'truck':truck,'drivers':drivers})
-
+ 
 def AdminBooking(request):
     ab = BTruck.objects.all()
     return render(request,'adminbooking.html',{'ab':ab})
@@ -340,6 +318,10 @@ def DriverProfile(request):
 
 def DriverBasic(request):
     return render(request,'driverbasic.html')
+
+def DriverBookingSummary(request):
+    return render(request,'driverbookingsummary.html')
+
 
 def forgotPassword(request):
     if request.method == 'POST':
@@ -611,8 +593,10 @@ def pincode_view(request):
         pin_start = str(670001)
         pin_end = str(695615)
 
-        
-        if (pickup_pincode >= pin_start and pickup_pincode <= pin_end) : 
+        # if variable is not None and variable >= 'string':
+    # do something
+
+        if  pickup_pincode is not None and pickup_pincode >= pin_start and pickup_pincode <= pin_end : 
 
             pickup_response = requests.get(ENDPOINT + pickup_pincode )
             pickup_pincode_information = json.loads(pickup_response.text)
@@ -624,7 +608,7 @@ def pincode_view(request):
             })
             
         
-        elif (delivery_pincode >= pin_start and delivery_pincode <= pin_end):
+        elif delivery_pincode is not None and delivery_pincode >= pin_start and delivery_pincode <= pin_end:
             delivery_response = requests.get(ENDPOINT + delivery_pincode )
             delivery_pincode_information = json.loads(delivery_response.text)
             delivery_information = delivery_pincode_information[0]['PostOffice'][0]

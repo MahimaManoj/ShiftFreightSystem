@@ -7,7 +7,7 @@ import datetime
 # from Home.models import vehicle
 from Home.models import CompanyTruck
 import datetime
-
+from location_field.models.plain import PlainLocationField
 
 
 
@@ -150,8 +150,8 @@ class BTruck(models.Model):
     )
     boo_id = models.AutoField(primary_key=True)
     us_id = models.ForeignKey(Account,related_name='consignor', on_delete=models.CASCADE)
-    dr_id =models.ForeignKey(Account,related_name='driver', on_delete=models.CASCADE,null = True)
-    veh_id = models.ForeignKey(CompanyTruck,on_delete=models.CASCADE,null=True)
+    dr_id =models.ForeignKey(Account,related_name='driver', on_delete=models.CASCADE,blank=True,null = True)
+    veh_id = models.ForeignKey(CompanyTruck,on_delete=models.CASCADE,blank=True,null=True)
     p_cit = models.CharField(max_length=100)
     p_addres1 = models.CharField(max_length=100)
     p_addres2 = models.CharField(max_length=100)
@@ -170,9 +170,11 @@ class BTruck(models.Model):
     service = models.CharField(max_length=50,choices=service,default='None')
     load_descriptio = models.CharField(max_length=100)
     statu = models.CharField(choices=statu,max_length=100,default='Pending')
+    location = PlainLocationField(based_fields=['d_cit'], zoom=7)
     def __str__(self):
         return "%s - %s - %s"%(self.p_cit,self.d_cit,self.statu)
    
+
 
 
 
