@@ -175,6 +175,23 @@ class BTruck(models.Model):
         return "%s - %s - %s"%(self.p_cit,self.d_cit,self.statu)
    
 
+class FuelDetail(models.Model):
+    fuel_id = models.AutoField(primary_key=True)
+    added_driver_id= models.ForeignKey(Account, related_name='truck_driver', on_delete=models.CASCADE,blank=True,null=True)
+    truck = models.CharField(max_length=50)
+    fuel_type = models.CharField(max_length=50)
+    odometer_reading = models.CharField(max_length=6)
+    fill_date = models.DateField()
+    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    comment = models.TextField()
+    bill_image = models.ImageField(upload_to='images/fuel_bills/')
+
+    def __str__(self):
+        return "%s - %s - %s - %s"%(self.fuel_id,self.added_driver_id,self.truck,self.quantity)
+  
+
+
 
 
 

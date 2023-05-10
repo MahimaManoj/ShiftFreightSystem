@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 
 from Home.models import vehicle
 from Home.models import CompanyTruck
-from .models import Account, BTruck
+from .models import Account, BTruck, FuelDetail
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -21,7 +21,8 @@ from twilio.rest import Client
 from random import randint
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.http import HttpResponseRedirect
+import razorpay
 import requests
 import json
 from django.http import HttpResponse
@@ -170,15 +171,9 @@ def Book1(request):
         weigh=request.POST['weigh']
         service=request.POST.getlist('service')
         load_descriptio=request.POST['load_descriptio']
-       
-
         pincode = p_pincod or d_pincod
-        
         if request.method == 'POST':
-            
-           
                 # raise ValueError("Pincode not valid. Enter a pincode existing in Kerala.")
-
             btr = BTruck.objects.create(
                 us_id = user,
                 p_cit=p_cit,
@@ -201,7 +196,6 @@ def Book1(request):
             )
             btr.save()
             return HttpResponse("<script>alert('Booking successfully.');window.location='/accounts/viewbooking/';</script>")
-
     return render(request,'book.html')
 
 
@@ -280,32 +274,78 @@ def AdminProfile(request):
     cp = Account.objects.filter(id=request.user.id)
     return render(request,'adminprofile.html',{'cp':cp})
 
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+# from .models import FuelDetail
 
-def AddFuell(request):
-    # dr = Driver.objects.all()
-    # if request.method == 'POST':
-    #     user = request.user
-    #     regno=request.POST['regno']
-    #     drivername=request.POST.get('drivername')
-    #     fuel_quantity=request.POST['fuel_quantity']
-    #     odometer_reading=request.POST['odometer_reading']
-    #     fill_date=request.POST['fill_date']
-    #     amount=request.POST['amount']
-    #     comment=request.POST['comment']
-    #     af = AddFuel.objects.create(
-    #         user_id=user,
-    #         vehicle_id=regno,
-    #          driver_id = drivername,
-    #          fuel_quantity=fuel_quantity,
-    #          odometer_reading=odometer_reading,
-    #          fill_date=fill_date,
-    #          amount=amount,
-    #          comment=comment
-    #     )
-        # af.save()
-        # return HttpResponse("<script>alert('Fuel added successfully.');window.location='/accounts/viewfuel/';</script>")
+def AddFuel(request):
+    if request.method == 'POST':
+        # a=Account.objects.filter(phone=phone_number).values('id').get()['id']
+        # print(a,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        # user = request.user
+        # print(user)
+        truck = request.POST.get('truck')
+        fuel_type = request.POST.get('fuel_type')
+        odometer_reading = request.POST.get('odometer_reading')
+        fill_date = request.POST.get('fill_date')
+        quantity = request.POST.get('quantity')
+        amount = request.POST.get('amount')
+        comment = request.POST.get('comment')
+        bill_image = request.FILES.get('bill_image')
+        fuel_detail = FuelDetail.objects.create(
+                # added_driver_id=user,
+                truck=truck,
+                fuel_type=fuel_type,
+                odometer_reading=odometer_reading,
+                fill_date=fill_date,
+                quantity=quantity,
+                amount=amount,
+                comment=comment,
+                bill_image=bill_image,
+            )
+        fuel_detail.save()
+        # messages.success(request, 'Fuel details added successfully!')
+        
+        # redirect to the fuel detail view
+        return redirect('viewfuel')
     
-        return render(request,'addfuel.html')
+    # render the add fuel template
+    return render(request, 'viewfuel.html')
+
+def ViewFuel(request):
+    fuel_details = FuelDetail.objects.all()
+    print(fuel_details,"aaaaaaaaaaaaaaaaaa")
+    return render(request,'viewfuel.html',{'fuel_details':fuel_details})
+
+
+# def AddFuell(request):
+#     # dr = Driver.objects.all()
+#     if request.method == 'POST':
+#         user = request.user
+#         truck=request.POST['truck']
+#         odometer_reading = request.POST['odometer_reading']
+#         quantity=request.POST['fuel_quantity']
+#         fill_date=request.POST['fill_date']
+#         amount=request.POST['amount']
+#         comment=request.POST['comment']
+#         bill_image= request.POST['bill_image']
+#         if request.method == 'POST':
+#             fd = FuelDetail.objects.create(
+#                 user_id=user,
+#                 truck = truck,
+#                 odometer_reading=odometer_reading,
+#                 fill_date=fill_date,
+#                 quantity= quantity,
+#                 amount=amount,
+#                 comment=comment,
+#                 bill_image=bill_image
+#             )
+#             fd.save()
+#             print(fd)
+#         return HttpResponse("<script>alert('Fuel added successfully.');window.location='/accounts/viewfuel/';</script>")
+    
+        # return render(request,'addfuel.html')
 
 def AddFuelDemo(request):
     return render(request,'addfueldemo.html')
@@ -328,9 +368,7 @@ def forgotPassword(request):
         email = request.POST['email']
         if Account.objects.filter(email=email).exists():
             user = Account.objects.get(email__exact=email)
-
             # Reset password email
-
             current_site = get_current_site(request)
             message = render_to_string('ResetPassword_email.html', {
                 'user': user,
@@ -338,7 +376,6 @@ def forgotPassword(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user),
             })
-
             send_mail(
                 'Please activate your account',
                 message,
@@ -346,7 +383,6 @@ def forgotPassword(request):
                 [email],
                 fail_silently=False,
             )
-            
             # messages.success(request, 'Password reset email has been sent to your email address.')
             return redirect('viewlogin')
         else:
@@ -373,7 +409,6 @@ def resetPassword(request):
     if request.method == 'POST':
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-
         if password == confirm_password:
             uid = request.session.get('uid')
             user = Account.objects.get(pk=uid)
@@ -387,192 +422,40 @@ def resetPassword(request):
     else:
         return render(request, 'ResetPassword.html')
 
-
-def activate(request, uidb64, token):
-    try:
-        uid = urlsafe_base64_decode(uidb64).decode()
-        user = Account._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
-        user = None
-
-    if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        # messages.success(request, 'Congratulations! Your account is activated.')
-        return redirect('viewlogin')
-    else:
-        # messages.error(request, 'Invalid activation link')
-        return redirect('register')
-
-
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout(request):
     auth.logout(request)
     return redirect('viewlogin')  
 
-
 def DriverConsignment(request):
     return render(request,'driverconsignment.html')
 
 def ConsignorProfile(request):
-    
     cp = Account.objects.filter(id=request.user.id)
     return render(request,'consignorprofile.html',{'cp':cp})
-
-
-
-# @csrf_exempt
-# def send_otp(request):
-#     if request.method == 'POST':
-#         phone_number = request.POST.get('phone_number')
-#         otp = str(randint(100000, 999999))  # generate a 6-digit OTP
-#         message = f'Your OTP is {otp}. Do not share it with anyone.'
-#         try:
-#             # replace with your Twilio phone number and sender ID
-#             client.messages.create(to=phone_number, from_='your_twilio_phone_number_here', body=message)
-#             return JsonResponse({'status': 'success', 'message': 'OTP sent successfully.'})
-#         except:
-#             return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again later.'})
-        
-
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from twilio.rest import Client
-from random import randint
-
-# replace with your account SID and auth token
-# account_sid = ''
-# auth_token = ''
-# client = Client(account_sid, auth_token)
-
-# @csrf_exempt
-# def send_otp(request):
-#     if request.method == 'POST':
-#         phone_number = request.POST.get('phone_number')
-#         otp = str(randint(100000, 999999))  # generate a 6-digit OTP
-#         message = f'Your OTP is {otp}. Do not share it with anyone.'
-#         try:
-#             # replace with your Twilio phone number and sender ID
-#             client.messages.create(to=phone_number, from_='your_twilio_phone_number_here', body=message)
-#             return JsonResponse({'status': 'success', 'message': 'OTP sent successfully.'})
-#         except:
-#             return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again later.'})
-
-
-
-# def generate_otp():
-#     otp = random.randint(100000, 999999)
-#     return otp
-
-
-# function to send OTP via SMS
-# def send_otp_via_sms(phone_number, otp):
-#     print(f'Sending OTP {otp} to {phone_number} via SMS...')
-
-# # function to verify OTP
-# def verify_otp(otp, user_input):
-#     if str(otp) == user_input:
-#         return True
-#     else:
-#         return False
-
-# # main function for OTP login
-# def otp_login(driver_info):
-#     phone_number = driver_info['phone_number']
-#     otp = generate_otp()
-#     send_otp_via_sms(phone_number, otp)
-#     user_input = input('Enter OTP received via SMS: ')
-#     if verify_otp(otp, user_input):
-#         print(f'Welcome {driver_info["name"]}!')
-#     else:
-#         print('Invalid OTP. Please try again.')
-
-# # test OTP login function
-# otp_login(driver_info)
-
-
-# def Driverlog(request):
-#     if request.method == 'POST':
-#         phone_number = request.POST['phone_number']
-#         print(phone_number)
-#         user=auth.authenticate(phone=phone_number)
-#         print(user)
-
-#         if user is not None:
-#             #login(user)
-#             auth.login(request, user)
-#             # save email in session
-#             request.session['phone_number'] = phone_number
-
-#             if user.is_driver:
-#                 return redirect('driverhome')
-#             else:
-#                 return redirect('drlog')
-#         else:
-#             # messages.error(request, 'Invalid Credentials')
-#             return redirect('drlog') 
-
-#     return render(request,'drlog.html')
-
-
+  
 
 def Driverlog(request):
     if request.method == 'POST':
         user=request.user
-        print(user)
+        print(user,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         phone_number = request.POST['phone_number']
         print(phone_number)
+        a=Account.objects.filter(phone=phone_number).values('id').get()['id']
+        print(a,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         if(Account.objects.filter(phone=phone_number)):
             log=Account.objects.filter(phone=phone_number).values('role').get()['role']
             print(log)
             if log == 'is_driver':
-            #    a=Driver.objects.create(acc=user,driver_phone=phone_number)  
-            #    a.save()
                 return HttpResponse("<script>alert('driver logged');window.location='/accounts/driverhome/';</script>")
-                # return redirect('driverhome')  
             else:
-            #    messages.success(request,'Access Denied!!!')
                return HttpResponse("<script>alert('driver not logged');window.location='/accounts/drlog/';</script>")
-            #    return redirect('drlog')    
         else:
             return HttpResponse("<script>alert('it is not a driver');window.location='/accounts/drlog/';</script>")
-            # messages.success(request, 'Access Denied!!!')
             return redirect('drlog') 
     ann=Account.objects.filter(is_driver=True) 
     er=Account.objects.filter()        
     return render(request,'drlog.html',{'ann':ann}) 
-
-# def Driverlog(request):
- 
-#     if request.method == 'POST':
-#         user=request.user
-#         print(user)
-#         phone_number = request.POST['phone_number']
-#         print(phone_number)
-#         if(Account.objects.filter(phone=phone_number)):
-#             log=Account.objects.filter(phone=phone_number).values('role').get()['role']
-#             print(log)
-#             if log == 'is_driver':
-#                 otp = str(randint(100000, 999999))
-#                 message = f'Your OTP is {otp}. Do not share it with anyone.'
-#                 try:
-#                     # replace with your Twilio phone number and sender ID
-#                     client.messages.create(to=phone_number, from_='+15155828771', body=message)
-#                     return JsonResponse({'status': 'success', 'message': 'OTP sent successfully.'})
-#                 except:
-#                     return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again later.'})
-            
-#                 # return HttpResponse("<script>alert('OTP send');</script>")
-                 
-#             else: 
-#                return HttpResponse("<script>alert('driver not logged');window.location='/accounts/drlog/';</script>")  
-#         else:
-#             return HttpResponse("<script>alert('it is not a driver');window.location='/accounts/drlog/';</script>")
-            
-#     ann=Account.objects.filter(is_driver=True) 
-#     er=Account.objects.filter()        
-#     return render(request,'drlog.html',{'ann':ann}) 
 
 
 def Driverotp(request):
@@ -584,20 +467,13 @@ def AdminLocation(request):
 
 
 ENDPOINT ="https://api.postalpincode.in/pincode/"
-
 def pincode_view(request):
     if request.method == 'POST':
         pickup_pincode = request.POST.get('pickup_pincode')
         delivery_pincode = request.POST.get('delivery_pincode')
-
         pin_start = str(670001)
         pin_end = str(695615)
-
-        # if variable is not None and variable >= 'string':
-    # do something
-
         if  pickup_pincode is not None and pickup_pincode >= pin_start and pickup_pincode <= pin_end : 
-
             pickup_response = requests.get(ENDPOINT + pickup_pincode )
             pickup_pincode_information = json.loads(pickup_response.text)
             pickup_information = pickup_pincode_information[0]['PostOffice'][0]
@@ -605,9 +481,7 @@ def pincode_view(request):
 
             return render(request, 'pin.html', {
                 'pickup_information': pickup_information,
-            })
-            
-        
+            })  
         elif delivery_pincode is not None and delivery_pincode >= pin_start and delivery_pincode <= pin_end:
             delivery_response = requests.get(ENDPOINT + delivery_pincode )
             delivery_pincode_information = json.loads(delivery_response.text)
@@ -617,18 +491,59 @@ def pincode_view(request):
             return render(request, 'pin.html', {
                 # 'pickup_information': pickup_information,
                 'delivery_information': delivery_information,
-            })
-        
+            })    
         return HttpResponse("<script>alert('Pincode valid.');window.location='/accounts/book/';</script>")
-        
-            
-        # else:
-        #     return HttpResponse("<script>alert('Pincode not valid. Enter a pincode existing in Kerala.');window.location='/accounts/book/';</script>")
-
-        
     return render(request, 'pin.html')
    
+
+
+# To create views for editing and deleting fuel details,
         
+# from django.shortcuts import render, redirect
+# from .models import FuelDetails
+# from .forms import FuelDetailsForm
+
+# def fuel_edit(request, id):
+#     fuel = FuelDetails.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = FuelDetailsForm(request.POST, instance=fuel)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('fuel_list')
+#     else:
+#         form = FuelDetailsForm(instance=fuel)
+#     return render(request, 'fuel_edit.html', {'form': form})
+
+# def fuel_delete(request, id):
+#     fuel = FuelDetails.objects.get(id=id)
+#     fuel.delete()
+#     return redirect('fuel_list')
 
 
-    
+# def payment_page(request):
+#     return render(request,'consignorpayment.html')
+
+def payment_page(request):
+
+    client = razorpay.Client(auth=("rzp_test_2t1IjhGxWo2goH", "xXjQB9dasccu8vy1hE1cufGy"))
+
+    DATA = {
+        "amount": 500,
+        "currency": "INR",
+        "receipt": "receipt#1",
+
+    }
+    client.order.create(data=DATA)
+    return render(request,"viewbooking.html")
+
+def payment_done(request):
+    if request.session['email'] == 'null':
+        return redirect('accounts/viewbooking')
+
+    elif 'email' in request.session:
+        email = request.session['email']
+        public = Account.objects.get(email=email)
+        messages.info(request, "successfully registered")
+        public.status = 1
+        public.save()
+        return redirect('viewbooking.html')

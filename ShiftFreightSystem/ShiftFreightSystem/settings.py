@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'Home',
     'accounts',
     'rest_framework',
+    'drowsiness_detection',
 
     'location_field.apps.DefaultConfig',
+    
 
 ]
 JAZZMIN_SETTINGS = {
@@ -140,6 +142,8 @@ STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
+RAZORPAY_API_KEY="rzp_test_2t1IjhGxWo2goH"
+RAZORPAY_API_SECRET_KEY="xXjQB9dasccu8vy1hE1cufGy"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
